@@ -8,6 +8,7 @@ $loader->registerNamespaces(array(
     'Application'               => __DIR__,
     'Bundle'                    => __DIR__,
     'Doctrine\DBAL\Migrations'  => __DIR__.'/vendor/DoctrineMigrations/lib',
+    'DoctrineExtensions'        => __DIR__.'/vendor/DoctrineExtensions/lib',
     'Doctrine\Common'           => __DIR__.'/vendor/Doctrine/lib/vendor/doctrine-common/lib',
     'Doctrine\DBAL'             => __DIR__.'/vendor/Doctrine/lib/vendor/doctrine-dbal/lib',
     'Doctrine'                  => __DIR__.'/vendor/Doctrine/lib',

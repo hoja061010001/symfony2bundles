@@ -11,6 +11,7 @@ use Application\S2bBundle\Entities\Project;
 use Application\S2bBundle\Entities\User;
 use Application\S2bBundle\Github;
 use Symfony\Components\Console\Output\NullOutput as Output;
+use DoctrineExtensions\Paginate\Paginate;
 
 class RepoController extends Controller
 {
@@ -56,9 +57,14 @@ class RepoController extends Controller
         if(!isset($fields[$sort])) {
             throw new HttpException(sprintf('%s is not a valid sorting field', $sort), 406);
         }
-        $repos = $this->getRepository($class)->findAllSortedBy($sort);
 
-        return $this->render('S2bBundle:'.$class.':list', array('repos' => $repos, 'sort' => $sort, 'fields' => $fields, 'callback' => $this->getRequest()->get('callback')));
+        $limitPerPage = 5;
+        $offset = max(1, $this->getRequest()->get('page', 1));
+        $query = $this->getRepository($class)->getSortedByQuery($sort);
+        $count = Paginate::getTotalQueryResults($query);
+        $repos = $query->setFirstResult($offset)->setMaxResults($limitPerPage)->getResult();
+
+        return $this->render('S2bBundle:'.$class.':list', array('count' => $count, 'repos' => $repos, 'sort' => $sort, 'fields' => $fields, 'callback' => $this->getRequest()->get('callback')));
     }
 
     public function listLatestAction()
