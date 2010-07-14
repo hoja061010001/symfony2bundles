@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://www.symfony-project.org/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/dic/services http://www.symfony-project.org/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <parameter key="s2b.sitemap.provider.class">Application\S2bBundle\Sitemap\Provider</parameter>
+
+    </parameters>
+
+    <services>
+
+        <service id="s2b.sitemap.provider" class="%s2b.sitemap.provider.class%" shared="true">
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <annotation name="sitemap.provider" alias="s2b" />
+        </service>
+
+    </services>
+</container>

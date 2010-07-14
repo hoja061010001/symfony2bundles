@@ -16,6 +16,10 @@ markdown.parser: ~      # Enable the parser service
 
 time.helper: ~      # Enable the time helper
 
+sitemap.config: ~
+
+s2b.config: ~
+
 doctrine.orm:
   default_entity_manager:   default
   cache_driver:             apc           # array, apc, memcache, xcache
